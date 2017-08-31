@@ -14,11 +14,11 @@ this.ckan.module('daterangepicker-module', function ($, _) {
 
             // Populate the datepicker and hidden fields
             if (param_start) {
-                $('#datepicker #start').val(moment.utc(param_start).year());
+                $('#datepicker #start').val(moment.utc(param_start).format('YYYY-MM-DD'));
                 $('#ext_startdate').val(param_start);
             }
             if (param_end) {
-                $('#datepicker #end').val(moment.utc(param_end).year());
+                    $('#datepicker #end').val(moment.utc(param_end).format('YYYY-MM-DD'));
                 $('#ext_enddate').val(param_end);
             }
 
@@ -37,9 +37,9 @@ this.ckan.module('daterangepicker-module', function ($, _) {
 
             // Add a date-range picker widget to the <input> with id #daterange
             $('#datepicker.input-daterange').datepicker({
-                format: "yyyy",
-                startView: 3,
-                minViewMode: 2,
+                format: "yyyy-mm-dd",
+                startView: 0,
+                minViewMode: 0,
                 keyboardNavigation: false,
                 autoclose: true
             }).on('changeDate', function (ev) {
@@ -61,7 +61,7 @@ this.ckan.module('daterangepicker-module', function ($, _) {
                         case 'end':
                             // Set the value of the hidden <input id="ext_enddate"> to the chosen end date.
                             if (ev.date) {
-                                $('#ext_enddate').val(v.add('y', 1).subtract('s', 1).format(fs) + 'Z');
+                                $('#ext_enddate').val(v.format(fs) + 'Z');
                             } else {
                                 $('#ext_enddate').val('');
                             }
